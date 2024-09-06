@@ -236,3 +236,19 @@ explain (slicetable, costs off) SELECT * FROM explaintest;
 
 -- same in JSON format
 explain (slicetable, costs off, format json) SELECT * FROM explaintest;
+
+-- Test if explain analyze will hang with materialize node
+CREATE TABLE recursive_table_ic (a INT) DISTRIBUTED BY (a);
+INSERT INTO recursive_table_ic SELECT * FROM generate_series(20, 30000);
+
+explain (analyze, costs off, timing off, summary off) WITH RECURSIVE
+r(i) AS (
+	SELECT 1
+),
+y(i) AS (
+	SELECT 1
+	UNION ALL
+	SELECT i + 1 FROM y, recursive_table_ic WHERE NOT EXISTS (SELECT * FROM r LIMIT 10)
+)
+SELECT * FROM y LIMIT 10;
+DROP TABLE recursive_table_ic;
