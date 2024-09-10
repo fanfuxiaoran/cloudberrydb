@@ -1223,7 +1223,7 @@ standard_ExecutorFinish(QueryDesc *queryDesc)
 		planstate = queryDesc->planstate;
 
 	if (exec_identity != GP_IGNORE && planstate != NULL)
-		ExecSquelchNode(planstate);
+		ExecSquelchNode(planstate, true);
 
 	MemoryContextSwitchTo(oldcontext);
 
@@ -2788,7 +2788,6 @@ ExecutePlan(EState *estate,
 			 */
 			estate->es_got_eos = true;
 			estate->force_squelch = true;
-			ExecSquelchNode(planstate);
 			/* Allow nodes to release or shut down resources. */
 			(void) ExecShutdownNode(planstate);
 			break;

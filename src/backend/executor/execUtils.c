@@ -2037,7 +2037,7 @@ void mppExecutorFinishup(QueryDesc *queryDesc)
 		 */
 		if (!estate->es_got_eos)
 		{
-			ExecSquelchNode(queryDesc->planstate);
+			ExecSquelchNode(queryDesc->planstate, true);
 		}
 
 		/*
@@ -2116,7 +2116,7 @@ uint64 mppExecutorWait(QueryDesc *queryDesc)
 		 */
 		if (!estate->es_got_eos)
 		{
-			ExecSquelchNode(queryDesc->planstate);
+			ExecSquelchNode(queryDesc->planstate, true);
 		}
 
 		/*

@@ -3596,8 +3596,10 @@ ExecReScanModifyTable(ModifyTableState *node)
 }
 
 void
-ExecSquelchModifyTable(ModifyTableState *node)
+ExecSquelchModifyTable(ModifyTableState *node, bool force)
 {
+	if (node->ss.ps.squelched)
+		return;
 	/*
 	 * ModifyTable nodes must run to completion when asked to Squelch so
 	 * that we don't risk losing modifications which should be performed
@@ -3612,4 +3614,5 @@ ExecSquelchModifyTable(ModifyTableState *node)
 		if (!result)
 			break;
 	}
+	node->ss.ps.squelched = true;
 }

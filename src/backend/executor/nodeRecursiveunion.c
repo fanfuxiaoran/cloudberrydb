@@ -351,11 +351,15 @@ ExecReScanRecursiveUnion(RecursiveUnionState *node)
 }
 
 void
-ExecSquelchRecursiveUnion(RecursiveUnionState *node)
+ExecSquelchRecursiveUnion(RecursiveUnionState *node, bool force)
 {
-	tuplestore_clear(node->working_table);
-	tuplestore_clear(node->intermediate_table);
+	if (!node->ss.ps.squelched)
+	{
+		tuplestore_clear(node->working_table);
+		tuplestore_clear(node->intermediate_table);
+		node->ss.ps.squelched = true;
+	}
 
-	ExecSquelchNode(outerPlanState(node));
-	ExecSquelchNode(innerPlanState(node));
+	ExecSquelchNode(outerPlanState(node), force);
+	ExecSquelchNode(innerPlanState(node), force);
 }

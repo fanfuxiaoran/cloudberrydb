@@ -399,12 +399,13 @@ ExecReScanMergeAppend(MergeAppendState *node)
 }
 
 void
-ExecSquelchMergeAppend(MergeAppendState *node)
+ExecSquelchMergeAppend(MergeAppendState *node, bool force)
 {
 	int			i;
-
+	node->ss.ps.squelched = true;
+	
 	for (i = 0; i < node->ms_nplans; i++)
 	{
-		ExecSquelchNode(node->mergeplans[i]);
+		ExecSquelchNode(node->mergeplans[i], force);
 	}
 }
