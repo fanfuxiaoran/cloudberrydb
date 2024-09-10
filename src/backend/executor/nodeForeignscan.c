@@ -449,10 +449,13 @@ ExecForeignScanInitializeWorker(ForeignScanState *node,
 void
 ExecShutdownForeignScan(ForeignScanState *node)
 {
+	if (node->ss.ps.squelched)
+		return;
 	FdwRoutine *fdwroutine = node->fdwroutine;
 
 	if (fdwroutine->ShutdownForeignScan)
 		fdwroutine->ShutdownForeignScan(node);
+	node->ss.ps.squelched = true;
 }
 
 /* ----------------------------------------------------------------
