@@ -788,7 +788,7 @@ ExecSquelchNode(PlanState *node, bool force)
 		case T_ResultState:
 		case T_ProjectSetState:
 			node->squelched = true;
-			ExecSquelchNode(outerPlanState(node, force));
+			ExecSquelchNode(outerPlanState(node), force);
 			ExecSquelchNode(innerPlanState(node), force);
 			break;
 
