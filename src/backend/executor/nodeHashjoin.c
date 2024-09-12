@@ -1824,7 +1824,7 @@ ExecEagerFreeHashJoin(HashJoinState *node)
 void
 ExecSquelchHashJoin(HashJoinState *node, bool force)
 {
-	if (!node->js.ps.squechled)
+	if (!node->js.ps.squelched)
 	{
 		ExecEagerFreeHashJoin(node);
 		node->js.ps.squelched = true;
