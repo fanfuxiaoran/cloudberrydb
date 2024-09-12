@@ -824,7 +824,7 @@ ExecSquelchNode(PlanState *node, bool force)
 			 * For ForeignScans, PostgreSQL's shutdown function does exactly
 			 * what we want.
 			 */
-			ExecShutdownForeignScan((ForeignScanState *) node, force);
+			ExecShutdownForeignScan((ForeignScanState *) node);
 			break;
 
 		case T_BitmapHeapScanState:

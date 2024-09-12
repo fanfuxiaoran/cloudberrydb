@@ -447,7 +447,7 @@ ExecForeignScanInitializeWorker(ForeignScanState *node,
  * ----------------------------------------------------------------
  */
 void
-ExecShutdownForeignScan(ForeignScanState *node, bool false)
+ExecShutdownForeignScan(ForeignScanState *node)
 {
 	if (node->ss.ps.squelched)
 		return;
