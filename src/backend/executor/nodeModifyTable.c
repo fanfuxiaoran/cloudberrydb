@@ -3614,5 +3614,5 @@ ExecSquelchModifyTable(ModifyTableState *node, bool force)
 		if (!result)
 			break;
 	}
-	node->ss.ps.squelched = true;
+	node->ps.squelched = true;
 }
