@@ -1827,7 +1827,7 @@ ExecSquelchHashJoin(HashJoinState *node, bool force)
 	if (!node->squechled)
 	{
 		ExecEagerFreeHashJoin(node);
-		node->ss.ps.squelched = true;
+		node->ps.squelched = true;
 	}
 	ExecSquelchNode(outerPlanState(node), force);
 	ExecSquelchNode(innerPlanState(node), force);
