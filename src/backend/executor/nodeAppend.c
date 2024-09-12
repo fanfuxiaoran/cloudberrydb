@@ -1228,7 +1228,7 @@ void
 ExecSquelchAppend(AppendState *node, bool force)
 {
 	int			i;
-	node->ss.ps.squelched = true;
+	node->ps.squelched = true;
 	for (i = 0; i < node->as_nplans; i++)
 		ExecSquelchNode(node->appendplans[i], force);
 }
