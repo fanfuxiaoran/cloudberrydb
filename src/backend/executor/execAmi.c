@@ -732,7 +732,7 @@ ExecSupportsBackwardScan(Plan *node)
  * when force is true.
  */
 void
-ExecSquelchNode(PlanState *node, foreach, bool force)
+ExecSquelchNode(PlanState *node, bool force)
 {
 	ListCell   *lc;
 
