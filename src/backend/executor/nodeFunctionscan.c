@@ -791,6 +791,7 @@ ExecSquelchFunctionScan(FunctionScanState *node, bool force)
 		ExecEagerFreeFunctionScan(node);
 		node->ss.ps.squelched = true;
 	}
+}
 
 void
 function_scan_create_bufname_prefix(char* p, int size, int initplan_id)
