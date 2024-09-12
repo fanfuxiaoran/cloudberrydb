@@ -1391,7 +1391,7 @@ ExecSquelchMotion(MotionState *node, bool force)
 	Motion	   *motion;
 
 	AssertArg(node != NULL);
-	if (node->ss.ps.squelched)
+	if (node->ps.squelched)
 		return;
 	motion = (Motion *) node->ps.plan;
 	node->stopRequested = true;
@@ -1401,5 +1401,5 @@ ExecSquelchMotion(MotionState *node, bool force)
 	SendStopMessage(node->ps.state->motionlayer_context,
 					node->ps.state->interconnect_context,
 					motion->motionID);
-	node->ss.ps.squelched = true;
+	node->ps.squelched = true;
 }
