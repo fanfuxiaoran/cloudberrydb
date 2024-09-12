@@ -539,7 +539,7 @@ ExecSquelchMaterial(MaterialState *node, bool force)
 	 * possible that ExecMaterial hasn't been called even once yet, and we
 	 * haven't created the tuplestore yet.
 	 */
-	if (!node->ss.ps.squelcheld && (!node->delayEagerFree || force))
+	if (!node->ss.ps.squelched && (!node->delayEagerFree || force))
 	{
 		ExecEagerFreeMaterial(node);
 		node->ss.ps.squelched = true;
