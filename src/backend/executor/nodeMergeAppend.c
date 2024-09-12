@@ -402,7 +402,7 @@ void
 ExecSquelchMergeAppend(MergeAppendState *node, bool force)
 {
 	int			i;
-	node->ss.ps.squelched = true;
+	node->ps.squelched = true;
 	
 	for (i = 0; i < node->ms_nplans; i++)
 	{
