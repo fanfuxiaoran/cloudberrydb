@@ -455,7 +455,6 @@ ExecShutdownForeignScan(ForeignScanState *node)
 
 	if (fdwroutine->ShutdownForeignScan)
 		fdwroutine->ShutdownForeignScan(node);
-	node->ss.ps.squelched = true;
 }
 
 /* ----------------------------------------------------------------
