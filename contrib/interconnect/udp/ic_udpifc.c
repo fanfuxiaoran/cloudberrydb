@@ -4137,9 +4137,11 @@ RecvTupleChunkFromAnyUDPIFC_Internal(ChunkTransportState *transportStates,
 
 		ic_statistics.totalRecvQueueSize += conn->pkt_q_size;
 		ic_statistics.recvQueueSizeCountingTime++;
+		elog(INFO, "CONNECT SIZE %d", conn->pkt_q_size );
 
 		if (conn->pkt_q_size > 0)
 		{
+			elog(INFO, "FOUND IS TRUE");
 			found = true;
 			prepareRxConnForRead(&conn->mConn);
 			break;
