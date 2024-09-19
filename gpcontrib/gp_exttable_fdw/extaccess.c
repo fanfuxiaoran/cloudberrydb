@@ -449,6 +449,7 @@ external_endscan(FileScanDesc scan)
 		 * enough tuples and query can return correctly,
 		 * so slient errors when closing external file.
 		 */
+		elog(INFO, "end the query %d", !QueryFinishPending);
 		url_fclose(scan->fs_file, !QueryFinishPending, relname);
 		scan->fs_file = NULL;
 	}

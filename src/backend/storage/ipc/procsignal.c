@@ -651,6 +651,7 @@ QueryFinishHandler(void)
 	 */
 	if (!proc_exit_inprogress && Gp_role == GP_ROLE_EXECUTE)
 	{
+		elog(INFO, "QueryFinishHandler called");
 		QueryFinishPending = true;
 	}
 }
